@@ -24,39 +24,44 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background font-nasalization">
       <div className="container mx-auto p-6">
         {/* Header */}
-        <Card className="mb-6 border border-primary/20 shadow-card-enhanced relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-card opacity-80"></div>
-          <div className="absolute inset-0 bg-gradient-neon opacity-10 animate-pulse"></div>
-          <CardHeader className="relative z-10">
+        <Card className="mb-8 border border-primary/30 shadow-cosmic relative overflow-hidden group backdrop-blur-xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-card/80 via-muted/50 to-card/80"></div>
+          <div className="absolute inset-0 bg-gradient-neon opacity-5 animate-pulse"></div>
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-primary blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-1000"></div>
+          <CardHeader className="relative z-10 p-8">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center overflow-hidden shadow-neon border border-primary/30 bg-gradient-to-br from-primary/20 to-secondary/20">
-                  <img src={logoImage} alt="AlienDEX" className="w-full h-full object-contain drop-shadow-glow" />
+              <div className="flex items-center gap-6">
+                <div className="relative">
+                  <div className="w-20 h-20 rounded-2xl flex items-center justify-center overflow-hidden shadow-cosmic border-2 border-primary/40 bg-gradient-to-br from-primary/30 to-secondary/30 backdrop-blur-sm">
+                    <img src={logoImage} alt="AlienDEX" className="w-full h-full object-contain drop-shadow-glow" />
+                  </div>
+                  <div className="absolute -inset-2 bg-gradient-primary rounded-2xl blur-md opacity-30 animate-pulse"></div>
                 </div>
                 <div>
-                  <CardTitle className="text-3xl font-bold bg-gradient-neon bg-clip-text text-transparent drop-shadow-sm">
+                  <CardTitle className="text-4xl font-bold bg-gradient-neon bg-clip-text text-transparent drop-shadow-lg tracking-wide">
                     AlienDEX
                   </CardTitle>
-                  <p className="text-sm text-muted-foreground font-medium">Decentralized Exchange & Gaming Hub</p>
+                  <p className="text-muted-foreground font-medium text-lg mt-1 tracking-wide">Decentralized Exchange & Gaming Hub</p>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full border border-primary/30 shadow-neon">
-                  <Wifi className="w-4 h-4 text-primary animate-pulse" />
-                  <span className="text-sm text-primary font-semibold">Connected</span>
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl border border-primary/40 shadow-neon backdrop-blur-sm">
+                  <Wifi className="w-5 h-5 text-primary animate-pulse" />
+                  <span className="text-primary font-bold text-lg">Connected</span>
                 </div>
-                <div className="text-right px-4 py-2 bg-gradient-to-br from-muted/50 to-background/50 rounded-lg border border-border">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Balance</p>
-                  <p className="font-bold text-lg text-foreground">${userBalance.toFixed(2)}</p>
+                <div className="text-right px-6 py-3 bg-gradient-to-br from-muted/60 to-background/60 rounded-2xl border border-border shadow-deep backdrop-blur-sm">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Total Balance</p>
+                  <p className="font-bold text-2xl text-foreground mt-1">${userBalance.toFixed(2)}</p>
                 </div>
                 <Button 
                   variant="outline" 
                   size="icon"
                   onClick={() => setShowSettings(!showSettings)}
-                  className="relative overflow-hidden group border-primary/30 hover:border-primary shadow-green hover:shadow-neon transition-all duration-300"
+                  className="relative overflow-hidden group border-2 border-primary/40 hover:border-primary shadow-green hover:shadow-cosmic transition-all duration-500 w-14 h-14 rounded-xl backdrop-blur-sm"
                 >
-                  <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                  <Settings className={`w-4 h-4 transition-all duration-300 ${showSettings ? 'rotate-180 text-secondary' : 'group-hover:rotate-90 group-hover:text-primary'}`} />
+                  <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-cosmic blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                  <Settings className={`w-5 h-5 transition-all duration-500 ${showSettings ? 'rotate-180 text-secondary scale-110' : 'group-hover:rotate-90 group-hover:text-primary group-hover:scale-110'}`} />
                 </Button>
               </div>
             </div>
@@ -64,27 +69,41 @@ const Index = () => {
         </Card>
 
         {/* Live Price Ticker */}
-        <Card className="mb-6 border border-primary/20 shadow-card-enhanced relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-card opacity-90"></div>
+        <Card className="mb-8 border border-primary/30 shadow-cosmic relative overflow-hidden backdrop-blur-xl">
+          <div className="absolute inset-0 bg-gradient-to-r from-card/80 via-muted/40 to-card/80"></div>
           <div className="absolute inset-0 bg-gradient-ticker animate-pulse"></div>
-          <CardContent className="p-4 relative z-10">
-            <div className="flex items-center gap-8 overflow-x-auto scrollbar-hide">
+          <div className="absolute -top-5 -left-5 w-32 h-32 bg-gradient-primary blur-3xl opacity-10 animate-pulse"></div>
+          <CardContent className="p-6 relative z-10">
+            <div className="flex items-center gap-6 overflow-x-auto scrollbar-hide">
               {Object.values(priceData).map((token, index) => (
-                <div key={token.symbol} className="flex items-center gap-3 min-w-fit px-4 py-2 bg-gradient-to-r from-muted/30 to-background/30 rounded-lg border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-green">
-                  <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${token.symbol === 'ALIEN' ? 'bg-secondary animate-pulse' : 'bg-primary'}`}></div>
-                    <span className="font-bold text-foreground text-sm">{token.symbol}</span>
+                <div 
+                  key={token.symbol} 
+                  className="flex items-center gap-4 min-w-fit px-6 py-4 bg-gradient-to-br from-muted/40 to-background/40 rounded-2xl border border-primary/30 hover:border-primary/60 transition-all duration-500 hover:shadow-cosmic hover:scale-105 backdrop-blur-sm group"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-3 h-3 rounded-full ${
+                      token.symbol === 'ALIEN' 
+                        ? 'bg-gradient-to-r from-secondary to-primary animate-pulse shadow-lg' 
+                        : 'bg-gradient-to-r from-primary to-secondary shadow-md'
+                    }`}></div>
+                    <span className="font-bold text-foreground text-lg tracking-wider">{token.symbol}</span>
                   </div>
-                  <span className="text-foreground font-semibold">
-                    ${token.price.toFixed(token.symbol === 'ALIEN' ? 2 : 2)}
-                  </span>
-                  <span className={`text-sm font-semibold px-2 py-1 rounded-full ${
-                    token.change24h >= 0 
-                      ? 'text-primary bg-primary/20' 
-                      : 'text-destructive bg-destructive/20'
-                  }`}>
-                    {token.change24h >= 0 ? '+' : ''}{token.change24h.toFixed(2)}%
-                  </span>
+                  <div className="text-right">
+                    <span className="text-foreground font-bold text-xl">
+                      ${token.price.toLocaleString('en-US', { 
+                        minimumFractionDigits: token.symbol === 'ADA' ? 2 : 0,
+                        maximumFractionDigits: token.symbol === 'ADA' ? 2 : 0
+                      })}
+                    </span>
+                    <div className={`text-sm font-bold px-3 py-1 rounded-full mt-1 ${
+                      token.change24h >= 0 
+                        ? 'text-primary bg-primary/20 border border-primary/30' 
+                        : 'text-destructive bg-destructive/20 border border-destructive/30'
+                    }`}>
+                      {token.change24h >= 0 ? '▲' : '▼'} {Math.abs(token.change24h).toFixed(2)}%
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -93,72 +112,75 @@ const Index = () => {
 
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-6 mb-6 bg-gradient-to-r from-muted/50 to-background/50 border border-primary/20 p-2 rounded-xl shadow-card-enhanced">
-            <TabsTrigger 
-              value="swap" 
-              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
-            >
-              <ArrowDownUp className="w-4 h-4" />
-              <span className="font-semibold">Swap</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="trading" 
-              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
-            >
-              <TrendingUp className="w-4 h-4" />
-              <span className="font-semibold">Trading</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="gaming" 
-              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
-            >
-              <Gamepad2 className="w-4 h-4" />
-              <span className="font-semibold">Gaming</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="casino" 
-              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
-            >
-              <Dices className="w-4 h-4" />
-              <span className="font-semibold">Casino</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="lottery" 
-              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
-            >
-              <TicketIcon className="w-4 h-4" />
-              <span className="font-semibold">Lottery</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="rewards" 
-              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
-            >
-              <Crown className="w-4 h-4" />
-              <span className="font-semibold">Rewards</span>
-            </TabsTrigger>
-          </TabsList>
+          <Card className="mb-8 border border-primary/30 shadow-cosmic backdrop-blur-xl">
+            <div className="absolute inset-0 bg-gradient-to-r from-card/60 via-muted/30 to-card/60"></div>
+            <TabsList className="relative z-10 grid w-full grid-cols-6 p-3 m-4 bg-gradient-to-r from-muted/50 via-background/50 to-muted/50 border border-primary/30 rounded-2xl shadow-deep backdrop-blur-sm">
+              <TabsTrigger 
+                value="swap" 
+                className="flex items-center gap-3 py-4 px-6 transition-all duration-500 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-cosmic data-[state=active]:scale-105 hover:bg-primary/10 rounded-xl border border-transparent data-[state=active]:border-primary/30"
+              >
+                <ArrowDownUp className="w-5 h-5" />
+                <span className="font-bold text-lg">Swap</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="trading" 
+                className="flex items-center gap-3 py-4 px-6 transition-all duration-500 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-cosmic data-[state=active]:scale-105 hover:bg-primary/10 rounded-xl border border-transparent data-[state=active]:border-primary/30"
+              >
+                <TrendingUp className="w-5 h-5" />
+                <span className="font-bold text-lg">Trading</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="gaming" 
+                className="flex items-center gap-3 py-4 px-6 transition-all duration-500 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-cosmic data-[state=active]:scale-105 hover:bg-primary/10 rounded-xl border border-transparent data-[state=active]:border-primary/30"
+              >
+                <Gamepad2 className="w-5 h-5" />
+                <span className="font-bold text-lg">Gaming</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="casino" 
+                className="flex items-center gap-3 py-4 px-6 transition-all duration-500 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-cosmic data-[state=active]:scale-105 hover:bg-primary/10 rounded-xl border border-transparent data-[state=active]:border-primary/30"
+              >
+                <Dices className="w-5 h-5" />
+                <span className="font-bold text-lg">Casino</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="lottery" 
+                className="flex items-center gap-3 py-4 px-6 transition-all duration-500 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-cosmic data-[state=active]:scale-105 hover:bg-primary/10 rounded-xl border border-transparent data-[state=active]:border-primary/30"
+              >
+                <TicketIcon className="w-5 h-5" />
+                <span className="font-bold text-lg">Lottery</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="rewards" 
+                className="flex items-center gap-3 py-4 px-6 transition-all duration-500 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-cosmic data-[state=active]:scale-105 hover:bg-primary/10 rounded-xl border border-transparent data-[state=active]:border-primary/30"
+              >
+                <Crown className="w-5 h-5" />
+                <span className="font-bold text-lg">Rewards</span>
+              </TabsTrigger>
+            </TabsList>
+          </Card>
 
-          <TabsContent value="swap">
+          <TabsContent value="swap" className="space-y-6">
             <SwapInterface />
           </TabsContent>
 
-          <TabsContent value="trading">
+          <TabsContent value="trading" className="space-y-6">
             <TradingView />
           </TabsContent>
 
-          <TabsContent value="gaming">
+          <TabsContent value="gaming" className="space-y-6">
             <GamingHub />
           </TabsContent>
 
-          <TabsContent value="casino">
+          <TabsContent value="casino" className="space-y-6">
             <CasinoGames />
           </TabsContent>
 
-          <TabsContent value="lottery">
+          <TabsContent value="lottery" className="space-y-6">
             <LotterySystem />
           </TabsContent>
 
-          <TabsContent value="rewards">
+          <TabsContent value="rewards" className="space-y-6">
             <RewardsPanel />
           </TabsContent>
         </Tabs>

@@ -15,11 +15,11 @@ const generateRandomPrice = (basePrice: number, volatility: number = 0.05): numb
 
 export const usePriceData = () => {
   const [prices, setPrices] = useState<Record<string, PriceData>>({
-    BTC: { symbol: 'BTC', price: 120000.00, change24h: 2.45, volume24h: 28500000000 },
-    ETH: { symbol: 'ETH', price: 4000.00, change24h: -1.23, volume24h: 15200000000 },
-    BNB: { symbol: 'BNB', price: 800.00, change24h: 3.67, volume24h: 1200000000 },
-    ADA: { symbol: 'ADA', price: 0.85, change24h: 5.42, volume24h: 890000000 },
-    SOL: { symbol: 'SOL', price: 200.00, change24h: -2.15, volume24h: 2100000000 },
+    BTC: { symbol: 'BTC', price: 120500.00, change24h: 2.45, volume24h: 28500000000 },
+    ETH: { symbol: 'ETH', price: 4050.00, change24h: -1.23, volume24h: 15200000000 },
+    BNB: { symbol: 'BNB', price: 820.00, change24h: 3.67, volume24h: 1200000000 },
+    ADA: { symbol: 'ADA', price: 0.95, change24h: 5.42, volume24h: 890000000 },
+    SOL: { symbol: 'SOL', price: 210.00, change24h: -2.15, volume24h: 2100000000 },
     ALIEN: { symbol: 'ALIEN', price: 69.00, change24h: 15.67, volume24h: 450000000 },
   });
 
