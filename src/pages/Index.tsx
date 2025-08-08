@@ -24,36 +24,39 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background font-nasalization">
       <div className="container mx-auto p-6">
         {/* Header */}
-        <Card className="mb-6 bg-gradient-card backdrop-blur-sm border-border shadow-glow">
-          <CardHeader>
+        <Card className="mb-6 border border-primary/20 shadow-card-enhanced relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-card opacity-80"></div>
+          <div className="absolute inset-0 bg-gradient-neon opacity-10 animate-pulse"></div>
+          <CardHeader className="relative z-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden">
-                  <img src={logoImage} alt="AlienDEX" className="w-full h-full object-contain" />
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center overflow-hidden shadow-neon border border-primary/30 bg-gradient-to-br from-primary/20 to-secondary/20">
+                  <img src={logoImage} alt="AlienDEX" className="w-full h-full object-contain drop-shadow-glow" />
                 </div>
                 <div>
-                  <CardTitle className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                  <CardTitle className="text-3xl font-bold bg-gradient-neon bg-clip-text text-transparent drop-shadow-sm">
                     AlienDEX
                   </CardTitle>
-                  <p className="text-sm text-muted-foreground">Decentralized Exchange & Gaming Hub</p>
+                  <p className="text-sm text-muted-foreground font-medium">Decentralized Exchange & Gaming Hub</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 px-3 py-1 bg-primary/20 rounded-full">
-                  <Wifi className="w-4 h-4 text-primary" />
-                  <span className="text-sm text-primary">Connected</span>
+                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full border border-primary/30 shadow-neon">
+                  <Wifi className="w-4 h-4 text-primary animate-pulse" />
+                  <span className="text-sm text-primary font-semibold">Connected</span>
                 </div>
-                <div className="text-right">
-                  <p className="text-sm text-muted-foreground">Balance</p>
-                  <p className="font-bold text-foreground">${userBalance.toFixed(2)}</p>
+                <div className="text-right px-4 py-2 bg-gradient-to-br from-muted/50 to-background/50 rounded-lg border border-border">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Balance</p>
+                  <p className="font-bold text-lg text-foreground">${userBalance.toFixed(2)}</p>
                 </div>
                 <Button 
                   variant="outline" 
                   size="icon"
                   onClick={() => setShowSettings(!showSettings)}
-                  className="relative overflow-hidden group"
+                  className="relative overflow-hidden group border-primary/30 hover:border-primary shadow-green hover:shadow-neon transition-all duration-300"
                 >
-                  <Settings className={`w-4 h-4 transition-transform duration-300 ${showSettings ? 'rotate-180' : 'group-hover:rotate-90'}`} />
+                  <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                  <Settings className={`w-4 h-4 transition-all duration-300 ${showSettings ? 'rotate-180 text-secondary' : 'group-hover:rotate-90 group-hover:text-primary'}`} />
                 </Button>
               </div>
             </div>
@@ -61,14 +64,25 @@ const Index = () => {
         </Card>
 
         {/* Live Price Ticker */}
-        <Card className="mb-6 bg-gradient-card backdrop-blur-sm border-border">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-6 overflow-x-auto">
-              {Object.values(priceData).map((token) => (
-                <div key={token.symbol} className="flex items-center gap-2 min-w-fit">
-                  <span className="font-semibold text-foreground">{token.symbol}</span>
-                  <span className="text-foreground">${token.price.toFixed(token.symbol === 'ALIEN' ? 6 : 2)}</span>
-                  <span className={`text-sm ${token.change24h >= 0 ? 'text-primary' : 'text-destructive'}`}>
+        <Card className="mb-6 border border-primary/20 shadow-card-enhanced relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-card opacity-90"></div>
+          <div className="absolute inset-0 bg-gradient-ticker animate-pulse"></div>
+          <CardContent className="p-4 relative z-10">
+            <div className="flex items-center gap-8 overflow-x-auto scrollbar-hide">
+              {Object.values(priceData).map((token, index) => (
+                <div key={token.symbol} className="flex items-center gap-3 min-w-fit px-4 py-2 bg-gradient-to-r from-muted/30 to-background/30 rounded-lg border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-green">
+                  <div className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full ${token.symbol === 'ALIEN' ? 'bg-secondary animate-pulse' : 'bg-primary'}`}></div>
+                    <span className="font-bold text-foreground text-sm">{token.symbol}</span>
+                  </div>
+                  <span className="text-foreground font-semibold">
+                    ${token.price.toFixed(token.symbol === 'ALIEN' ? 2 : 2)}
+                  </span>
+                  <span className={`text-sm font-semibold px-2 py-1 rounded-full ${
+                    token.change24h >= 0 
+                      ? 'text-primary bg-primary/20' 
+                      : 'text-destructive bg-destructive/20'
+                  }`}>
                     {token.change24h >= 0 ? '+' : ''}{token.change24h.toFixed(2)}%
                   </span>
                 </div>
@@ -79,30 +93,48 @@ const Index = () => {
 
         {/* Main Content */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-6 mb-6 bg-muted border-border">
-            <TabsTrigger value="swap" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+          <TabsList className="grid w-full grid-cols-6 mb-6 bg-gradient-to-r from-muted/50 to-background/50 border border-primary/20 p-2 rounded-xl shadow-card-enhanced">
+            <TabsTrigger 
+              value="swap" 
+              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
+            >
               <ArrowDownUp className="w-4 h-4" />
-              Swap
+              <span className="font-semibold">Swap</span>
             </TabsTrigger>
-            <TabsTrigger value="trading" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            <TabsTrigger 
+              value="trading" 
+              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
+            >
               <TrendingUp className="w-4 h-4" />
-              Trading
+              <span className="font-semibold">Trading</span>
             </TabsTrigger>
-            <TabsTrigger value="gaming" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            <TabsTrigger 
+              value="gaming" 
+              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
+            >
               <Gamepad2 className="w-4 h-4" />
-              Gaming
+              <span className="font-semibold">Gaming</span>
             </TabsTrigger>
-            <TabsTrigger value="casino" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            <TabsTrigger 
+              value="casino" 
+              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
+            >
               <Dices className="w-4 h-4" />
-              Casino
+              <span className="font-semibold">Casino</span>
             </TabsTrigger>
-            <TabsTrigger value="lottery" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            <TabsTrigger 
+              value="lottery" 
+              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
+            >
               <TicketIcon className="w-4 h-4" />
-              Lottery
+              <span className="font-semibold">Lottery</span>
             </TabsTrigger>
-            <TabsTrigger value="rewards" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            <TabsTrigger 
+              value="rewards" 
+              className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-green hover:bg-primary/10"
+            >
               <Crown className="w-4 h-4" />
-              Rewards
+              <span className="font-semibold">Rewards</span>
             </TabsTrigger>
           </TabsList>
 
