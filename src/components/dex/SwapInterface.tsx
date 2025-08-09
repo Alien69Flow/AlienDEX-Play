@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowDownUp, Settings, Info } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { usePriceData } from "@/hooks/usePriceData";
+
 const SwapInterface = () => {
   const [fromToken, setFromToken] = useState("ETH");
   const [toToken, setToToken] = useState("USDC");
@@ -13,7 +13,7 @@ const SwapInterface = () => {
   const [toAmount, setToAmount] = useState("");
   const [slippage, setSlippage] = useState("0.5");
   const { toast } = useToast();
-  const priceData = usePriceData();
+
   const tokens = [
     { symbol: "ETH", name: "Ethereum", price: 2500 },
     { symbol: "BTC", name: "Bitcoin", price: 45000 },
@@ -171,15 +171,10 @@ const SwapInterface = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              {Object.values(priceData).map((token) => (
-                <div key={token.symbol} className="flex justify-between items-center text-sm">
+              {tokens.slice(0, 5).map((token) => (
+                <div key={token.symbol} className="flex justify-between text-sm">
                   <span className="text-gray-400">{token.symbol}</span>
-                  <div className="text-right">
-                    <span className="text-white block">${token.price.toLocaleString()}</span>
-                    <span className={token.change24h >= 0 ? "text-green-400" : "text-red-400"}>
-                      {token.change24h >= 0 ? "+" : ""}{token.change24h.toFixed(2)}%
-                    </span>
-                  </div>
+                  <span className="text-white">${token.price.toLocaleString()}</span>
                 </div>
               ))}
             </div>

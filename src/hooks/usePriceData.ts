@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 interface PriceData {
   symbol: string;
@@ -8,14 +7,10 @@ interface PriceData {
   volume24h: number;
 }
 
-// Mapeo de symbols para CoinGecko API
-const COINGECKO_IDS = {
-  BTC: 'bitcoin',
-  ETH: 'ethereum', 
-  BNB: 'binancecoin',
-  ADA: 'cardano',
-  SOL: 'solana',
-  ALIEN: 'alien-token' // Placeholder - usar el ID real de ALIEN token
+// Simulación de datos en tiempo real
+const generateRandomPrice = (basePrice: number, volatility: number = 0.05): number => {
+  const change = (Math.random() - 0.5) * 2 * volatility;
+  return basePrice * (1 + change);
 };
 
 export const usePriceData = () => {
@@ -28,50 +23,27 @@ export const usePriceData = () => {
     ALIEN: { symbol: 'ALIEN', price: 69.00, change24h: 15.67, volume24h: 450000000 },
   });
 
-  const fetchRealPrices = async () => {
-    try {
-      const ids = Object.values(COINGECKO_IDS).filter(id => id !== 'alien-token').join(',');
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true`
-      );
-
-      const newPrices: Record<string, PriceData> = {};
-      
-      Object.entries(COINGECKO_IDS).forEach(([symbol, id]) => {
-        if (id === 'alien-token') {
-          // Mantener ALIEN con precio fijo y simulación
-          newPrices[symbol] = {
-            symbol,
-            price: 69.00 + (Math.random() - 0.5) * 2,
-            change24h: 15.67 + (Math.random() - 0.5) * 5,
-            volume24h: 450000000 * (0.9 + Math.random() * 0.2)
-          };
-        } else {
-          const data = response.data[id];
-          if (data) {
-            newPrices[symbol] = {
-              symbol,
-              price: data.usd,
-              change24h: data.usd_24h_change || 0,
-              volume24h: data.usd_24h_vol || 0
-            };
-          }
-        }
-      });
-
-      setPrices(newPrices);
-    } catch (error) {
-      console.error('Error fetching real prices:', error);
-      // Mantener precios simulados si falla la API
-    }
-  };
-
   useEffect(() => {
-    // Obtener precios reales al inicio
-    fetchRealPrices();
-    
-    // Actualizar cada 30 segundos para evitar rate limits
-    const interval = setInterval(fetchRealPrices, 30000);
+    const interval = setInterval(() => {
+      setPrices(prevPrices => {
+        const newPrices = { ...prevPrices };
+        
+        Object.keys(newPrices).forEach(symbol => {
+          const currentPrice = newPrices[symbol];
+          const newPrice = generateRandomPrice(currentPrice.price, 0.02);
+          const change = ((newPrice - currentPrice.price) / currentPrice.price) * 100;
+          
+          newPrices[symbol] = {
+            ...currentPrice,
+            price: newPrice,
+            change24h: currentPrice.change24h + (change * 0.1), // Gradual change
+            volume24h: currentPrice.volume24h * (0.95 + Math.random() * 0.1), // Random volume
+          };
+        });
+        
+        return newPrices;
+      });
+    }, 2000); // Actualiza cada 2 segundos
 
     return () => clearInterval(interval);
   }, []);
