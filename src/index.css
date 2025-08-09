@@ -117,7 +117,7 @@ All colors MUST be HSL.
   /* Efectos de brillos y destellos */
   .sparkle-effect {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
   }
   
   .sparkle-effect::before {
@@ -147,6 +147,7 @@ All colors MUST be HSL.
     border: 2px solid transparent;
     background: linear-gradient(hsl(240 10% 3.9%), hsl(240 10% 3.9%)) padding-box,
                 var(--gradient-neon) border-box;
+    overflow: visible;
   }
   
   @keyframes shimmer {
@@ -218,4 +219,9 @@ All colors MUST be HSL.
       touch-action: manipulation;
     }
   }
+
+  /* Evitar escala/desplazamiento en tabs activos y asegurar rendimiento */
+  [role="tablist"] [role="tab"][data-state="active"] { transform: none !important; }
+  [role="tablist"] [role="tab"] { will-change: background, color, border; }
+  .mobile-tab-grid { width: 100%; }
 }
