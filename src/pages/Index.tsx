@@ -114,7 +114,7 @@ const Index = () => {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <Card className="mb-8 border border-primary/30 shadow-cosmic backdrop-blur-xl relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-card/60 via-muted/30 to-card/60"></div>
-            <div className="mobile-tab-grid relative z-10 bg-gradient-to-r from-muted/50 via-background/50 to-muted/50 border border-primary/30 rounded-2xl shadow-deep backdrop-blur-sm m-3 md:m-4">
+            <TabsList className="mobile-tab-grid relative z-10 bg-gradient-to-r from-muted/50 via-background/50 to-muted/50 border border-primary/30 rounded-2xl shadow-deep backdrop-blur-sm m-3 md:m-4">
               <TabsTrigger 
                 value="swap" 
                 className="flex flex-col md:flex-row items-center gap-1 md:gap-3 py-3 px-2 md:py-4 md:px-6 transition-all duration-500 data-[state=active]:bg-gradient-button data-[state=active]:text-primary-foreground data-[state=active]:shadow-cosmic data-[state=active]:scale-105 hover:bg-primary/10 rounded-xl border border-transparent data-[state=active]:border-primary/30 touch-friendly sparkle-effect"
@@ -157,7 +157,7 @@ const Index = () => {
                 <Crown className="w-4 h-4 md:w-5 md:h-5" />
                 <span className="font-bold text-xs md:text-lg">Rewards</span>
               </TabsTrigger>
-            </div>
+            </TabsList>
           </Card>
 
           <TabsContent value="swap" className="space-y-6">
