@@ -7,15 +7,15 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowDownUp, Gamepad2, Dices, TicketIcon, Crown, TrendingUp, Wallet, Settings, Wifi } from "lucide-react";
 import SwapInterface from "@/components/dex/SwapInterface";
 import GamingHub from "@/components/gaming/GamingHub";
-import CasinoGames from "@/components/casino/CasinoGames";
+import SportsBook from "@/components/casino/SportsBook";
 import LotterySystem from "@/components/lottery/LotterySystem";
-import TradingView from "@/components/trading/TradingView";
-import RewardsPanel from "@/components/rewards/RewardsPanel";
+import AdvancedTrading from "@/components/trading/AdvancedTrading";
+import StakingRewards from "@/components/rewards/StakingRewards";
 import { usePriceData } from "@/hooks/usePriceData";
 import logoImage from "/lovable-uploads/240619a7-e276-4620-b32c-e03d0863931b.png";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("casino");
+  const [activeTab, setActiveTab] = useState("swap");
   const [showSettings, setShowSettings] = useState(false);
   const priceData = usePriceData();
   const [userBalance, setUserBalance] = useState(1000.50);
@@ -154,7 +154,7 @@ const Index = () => {
           </Card>
 
           <TabsContent value="casino" className="space-y-6">
-            <CasinoGames />
+            <SportsBook />
           </TabsContent>
 
           <TabsContent value="gaming" className="space-y-6">
@@ -166,7 +166,7 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="rewards" className="space-y-6">
-            <RewardsPanel />
+            <StakingRewards />
           </TabsContent>
 
           <TabsContent value="swap" className="space-y-6">
@@ -174,7 +174,7 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="trading" className="space-y-6">
-            <TradingView />
+            <AdvancedTrading />
           </TabsContent>
         </Tabs>
       </div>

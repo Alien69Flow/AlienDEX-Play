@@ -32,7 +32,13 @@ export const usePriceData = () => {
     try {
       const ids = Object.values(COINGECKO_IDS).filter(id => id !== 'alien-token').join(',');
       const response = await axios.get(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true`
+        `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true`,
+        {
+          headers: {
+            'Accept': 'application/json',
+          },
+          timeout: 10000,
+        }
       );
 
       const newPrices: Record<string, PriceData> = {};
