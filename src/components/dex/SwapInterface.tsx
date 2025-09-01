@@ -50,28 +50,31 @@ const SwapInterface = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="lg:col-span-2">
-        <Card className="bg-black/40 border-white/10">
+        <Card className="border border-primary/30 bg-card/60 backdrop-blur-sm">
           <CardHeader>
             <div className="flex justify-between items-center">
-              <CardTitle className="text-white">Swap Tokens</CardTitle>
-              <Button variant="ghost" size="sm">
+              <CardTitle className="text-foreground">Swap Tokens</CardTitle>
+              <Button variant="ghost" size="sm" className="hover:bg-muted/80">
                 <Settings size={16} />
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-6">
             {/* From Token */}
-            <div className="space-y-2">
-              <label className="text-sm text-gray-400">From</label>
-              <div className="flex space-x-2">
+            <div className="p-4 rounded-2xl border border-primary/20 bg-muted/30">
+              <label className="text-sm text-muted-foreground font-medium">From</label>
+              <div className="flex gap-3 mt-3">
                 <Select value={fromToken} onValueChange={setFromToken}>
-                  <SelectTrigger className="w-32 bg-black/60 border-white/20">
+                  <SelectTrigger className="w-40 bg-background/60 border-border">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {tokens.map((token) => (
                       <SelectItem key={token.symbol} value={token.symbol}>
-                        {token.symbol}
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium">{token.symbol}</span>
+                          <span className="text-xs text-muted-foreground">{token.name}</span>
+                        </div>
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -80,35 +83,42 @@ const SwapInterface = () => {
                   placeholder="0.0"
                   value={fromAmount}
                   onChange={(e) => setFromAmount(e.target.value)}
-                  className="bg-black/60 border-white/20 text-white"
+                  className="flex-1 text-xl font-bold bg-background/60 border-border text-right"
                 />
+              </div>
+              <div className="flex justify-between mt-2 text-sm text-muted-foreground">
+                <span>Balance: 0.00</span>
+                <span>≈ $0.00</span>
               </div>
             </div>
 
             {/* Flip Button */}
-            <div className="flex justify-center">
+            <div className="flex justify-center -my-2">
               <Button
-                variant="ghost"
-                size="sm"
+                variant="outline"
+                size="icon"
                 onClick={handleFlipTokens}
-                className="rounded-full p-2 hover:bg-white/10"
+                className="rounded-full border-primary/30 hover:bg-primary/10 hover:border-primary/50 h-10 w-10"
               >
                 <ArrowDownUp size={20} />
               </Button>
             </div>
 
             {/* To Token */}
-            <div className="space-y-2">
-              <label className="text-sm text-gray-400">To</label>
-              <div className="flex space-x-2">
+            <div className="p-4 rounded-2xl border border-primary/20 bg-muted/30">
+              <label className="text-sm text-muted-foreground font-medium">To (estimated)</label>
+              <div className="flex gap-3 mt-3">
                 <Select value={toToken} onValueChange={setToToken}>
-                  <SelectTrigger className="w-32 bg-black/60 border-white/20">
+                  <SelectTrigger className="w-40 bg-background/60 border-border">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {tokens.map((token) => (
                       <SelectItem key={token.symbol} value={token.symbol}>
-                        {token.symbol}
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium">{token.symbol}</span>
+                          <span className="text-xs text-muted-foreground">{token.name}</span>
+                        </div>
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -117,36 +127,43 @@ const SwapInterface = () => {
                   placeholder="0.0"
                   value={toAmount}
                   onChange={(e) => setToAmount(e.target.value)}
-                  className="bg-black/60 border-white/20 text-white"
+                  className="flex-1 text-xl font-bold bg-background/60 border-border text-right"
                 />
+              </div>
+              <div className="flex justify-between mt-2 text-sm text-muted-foreground">
+                <span>Balance: 0.00</span>
+                <span>≈ $0.00</span>
               </div>
             </div>
 
-            {/* Slippage Settings */}
-            <div className="flex justify-between items-center text-sm text-gray-400">
-              <span>Slippage Tolerance: {slippage}%</span>
-              <div className="flex space-x-2">
+            {/* Transaction Details */}
+            <div className="p-4 rounded-xl bg-muted/20 border border-border">
+              <div className="flex justify-between items-center text-sm mb-3">
+                <span className="text-muted-foreground">Slippage Tolerance</span>
+                <span className="font-medium">{slippage}%</span>
+              </div>
+              <div className="flex gap-2">
                 <Button
-                  variant="ghost"
+                  variant={slippage === "0.1" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSlippage("0.1")}
-                  className={slippage === "0.1" ? "bg-blue-500/20" : ""}
+                  className="flex-1"
                 >
                   0.1%
                 </Button>
                 <Button
-                  variant="ghost"
+                  variant={slippage === "0.5" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSlippage("0.5")}
-                  className={slippage === "0.5" ? "bg-blue-500/20" : ""}
+                  className="flex-1"
                 >
                   0.5%
                 </Button>
                 <Button
-                  variant="ghost"
+                  variant={slippage === "1.0" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSlippage("1.0")}
-                  className={slippage === "1.0" ? "bg-blue-500/20" : ""}
+                  className="flex-1"
                 >
                   1.0%
                 </Button>
@@ -155,7 +172,7 @@ const SwapInterface = () => {
 
             <Button
               onClick={handleSwap}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+              className="w-full h-14 text-lg font-bold bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground"
             >
               Swap Tokens
             </Button>
@@ -165,18 +182,23 @@ const SwapInterface = () => {
 
       <div className="space-y-4">
         {/* Token Prices */}
-        <Card className="bg-black/40 border-white/10">
+        <Card className="border border-primary/30 bg-card/60 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-white text-sm">Token Prices</CardTitle>
+            <CardTitle className="text-foreground text-sm">Token Prices</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {Object.values(priceData).map((token) => (
-                <div key={token.symbol} className="flex justify-between items-center text-sm">
-                  <span className="text-gray-400">{token.symbol}</span>
+                <div key={token.symbol} className="flex justify-between items-center p-2 rounded-lg hover:bg-muted/30 transition-colors">
+                  <span className="text-muted-foreground font-medium">{token.symbol}</span>
                   <div className="text-right">
-                    <span className="text-white block">${token.price.toLocaleString()}</span>
-                    <span className={token.change24h >= 0 ? "text-green-400" : "text-red-400"}>
+                    <span className="text-foreground block font-bold">
+                      ${token.price.toLocaleString('en-US', { 
+                        minimumFractionDigits: token.price < 1 ? 4 : 2,
+                        maximumFractionDigits: token.price < 1 ? 6 : 2
+                      })}
+                    </span>
+                    <span className={`text-xs font-medium ${token.change24h >= 0 ? "text-primary" : "text-destructive"}`}>
                       {token.change24h >= 0 ? "+" : ""}{token.change24h.toFixed(2)}%
                     </span>
                   </div>
@@ -187,26 +209,26 @@ const SwapInterface = () => {
         </Card>
 
         {/* Liquidity Info */}
-        <Card className="bg-black/40 border-white/10">
+        <Card className="border border-primary/30 bg-card/60 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-white text-sm flex items-center space-x-2">
+            <CardTitle className="text-foreground text-sm flex items-center gap-2">
               <Info size={16} />
-              <span>Liquidity Pool</span>
+              <span>Pool Information</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-gray-400">Total Liquidity</span>
-                <span className="text-white">$12.5M</span>
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between p-2 rounded-lg hover:bg-muted/30 transition-colors">
+                <span className="text-muted-foreground">Total Liquidity</span>
+                <span className="text-foreground font-bold">$12.5M</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">24h Volume</span>
-                <span className="text-white">$2.1M</span>
+              <div className="flex justify-between p-2 rounded-lg hover:bg-muted/30 transition-colors">
+                <span className="text-muted-foreground">24h Volume</span>
+                <span className="text-foreground font-bold">$2.1M</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Fee (24h)</span>
-                <span className="text-white">$6,300</span>
+              <div className="flex justify-between p-2 rounded-lg hover:bg-muted/30 transition-colors">
+                <span className="text-muted-foreground">Fee (24h)</span>
+                <span className="text-foreground font-bold">$6,300</span>
               </div>
             </div>
           </CardContent>

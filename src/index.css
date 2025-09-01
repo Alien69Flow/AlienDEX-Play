@@ -114,101 +114,21 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
-  /* Efectos de brillos y destellos */
-  .sparkle-effect {
-    position: relative;
-    overflow: visible;
+  /* Scrollbar hide utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   
-  .sparkle-effect::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: var(--gradient-shimmer);
-    opacity: 0;
-    animation: shimmer 3s infinite;
-    pointer-events: none;
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
   
-  .divine-glow {
-    box-shadow: var(--shadow-divine);
-    animation: divine-pulse 4s ease-in-out infinite;
-  }
-  
-  .stellar-glow {
-    box-shadow: var(--shadow-stellar);
-    animation: stellar-pulse 2s ease-in-out infinite alternate;
-  }
-  
-  .cosmic-border {
-    border: 2px solid transparent;
-    background: linear-gradient(hsl(240 10% 3.9%), hsl(240 10% 3.9%)) padding-box,
-                var(--gradient-neon) border-box;
-    overflow: visible;
-  }
-  
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%) translateY(-100%) rotate(45deg);
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(100%) translateY(100%) rotate(45deg);
-      opacity: 0;
-    }
-  }
-  
-  @keyframes divine-pulse {
-    0%, 100% {
-      box-shadow: var(--shadow-divine);
-    }
-    50% {
-      box-shadow: 0 0 300px hsl(45 93% 47% / 0.8), inset 0 0 150px hsl(142 76% 36% / 0.4);
-    }
-  }
-  
-  @keyframes stellar-pulse {
-    0% {
-      box-shadow: var(--shadow-stellar);
-    }
-    100% {
-      box-shadow: 0 0 120px hsl(142 76% 36% / 0.8), 0 0 180px hsl(45 93% 47% / 0.5);
-    }
-  }
-  
-  /* Responsive grid para tabs móviles */
-  .mobile-tab-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-    padding: 0.75rem;
-  }
-  
-  @media (min-width: 640px) {
-    .mobile-tab-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .mobile-tab-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-    }
-  }
-  
-  /* Efectos de hover mejorados para móvil */
+  /* Subtle hover effects */
   @media (hover: hover) {
     .hover-enhance:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: var(--shadow-cosmic);
+      transform: translateY(-1px);
+      transition: transform 0.2s ease;
     }
   }
   
@@ -219,9 +139,4 @@ All colors MUST be HSL.
       touch-action: manipulation;
     }
   }
-
-  /* Evitar escala/desplazamiento en tabs activos y asegurar rendimiento */
-  [role="tablist"] [role="tab"][data-state="active"] { transform: none !important; }
-  [role="tablist"] [role="tab"] { will-change: background, color, border; }
-  .mobile-tab-grid { width: 100%; }
 }
