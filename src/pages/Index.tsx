@@ -7,18 +7,20 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowDownUp, Gamepad2, Dices, TicketIcon, Crown, TrendingUp, Wallet, Settings, Wifi } from "lucide-react";
 import SwapInterface from "@/components/dex/SwapInterface";
 import GamingHub from "@/components/gaming/GamingHub";
-import SportsBook from "@/components/casino/SportsBook";
+import ClassicCasinoGames from "@/components/casino/ClassicCasinoGames";
 import LotterySystem from "@/components/lottery/LotterySystem";
 import AdvancedTrading from "@/components/trading/AdvancedTrading";
 import StakingRewards from "@/components/rewards/StakingRewards";
+import SettingsModal from "@/components/settings/SettingsModal";
 import { usePriceData } from "@/hooks/usePriceData";
+import { useWallet } from "@/hooks/useWallet";
 import logoImage from "/lovable-uploads/240619a7-e276-4620-b32c-e03d0863931b.png";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("swap");
   const [showSettings, setShowSettings] = useState(false);
   const priceData = usePriceData();
-  const [userBalance, setUserBalance] = useState(1000.50);
+  const { wallet, connectWallet, disconnect, isLoading, getShortAddress, isMetaMaskInstalled } = useWallet();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background font-nasalization">
@@ -42,14 +44,34 @@ const Index = () => {
                 </div>
               </div>
               <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 w-full md:w-auto">
-                <div className="flex items-center gap-3 px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl border border-primary/40 shadow-neon backdrop-blur-sm">
-                  <Wifi className="w-4 h-4 md:w-5 md:h-5 text-primary animate-pulse" />
-                  <span className="text-primary font-bold text-sm md:text-lg">Connected</span>
-                </div>
+                {wallet.isConnected ? (
+                  <div className="flex items-center gap-3 px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl border border-primary/40 shadow-neon backdrop-blur-sm">
+                    <Wifi className="w-4 h-4 md:w-5 md:h-5 text-primary animate-pulse" />
+                    <span className="text-primary font-bold text-sm md:text-lg">{getShortAddress(wallet.address)}</span>
+                  </div>
+                ) : (
+                  <Button 
+                    onClick={connectWallet}
+                    disabled={isLoading || !isMetaMaskInstalled}
+                    className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl border border-primary/40 shadow-neon backdrop-blur-sm hover:from-primary/40 hover:to-secondary/40"
+                  >
+                    <Wallet className="w-4 h-4 md:w-5 md:h-5" />
+                    <span className="font-bold text-sm md:text-lg">
+                      {!isMetaMaskInstalled ? 'Install MetaMask' : 
+                       isLoading ? 'Connecting...' : 'Connect Wallet'}
+                    </span>
+                  </Button>
+                )}
+                
                 <div className="text-center px-4 py-2 md:px-6 md:py-3 bg-gradient-to-br from-muted/60 to-background/60 rounded-2xl border border-border shadow-deep backdrop-blur-sm">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Total Balance</p>
-                  <p className="font-bold text-xl md:text-2xl text-foreground mt-1">${userBalance.toFixed(2)}</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">
+                    {wallet.isConnected ? 'ETH Balance' : 'Total Balance'}
+                  </p>
+                  <p className="font-bold text-xl md:text-2xl text-foreground mt-1">
+                    {wallet.isConnected ? `${wallet.balance} ETH` : '$1000.50'}
+                  </p>
                 </div>
+                
                 <Button 
                   variant="outline" 
                   size="icon"
@@ -154,7 +176,7 @@ const Index = () => {
           </Card>
 
           <TabsContent value="casino" className="space-y-6">
-            <SportsBook />
+            <ClassicCasinoGames />
           </TabsContent>
 
           <TabsContent value="gaming" className="space-y-6">
@@ -177,6 +199,9 @@ const Index = () => {
             <AdvancedTrading />
           </TabsContent>
         </Tabs>
+
+        {/* Settings Modal */}
+        <SettingsModal isOpen={showSettings} onClose={() => setShowSettings(false)} />
       </div>
     </div>
   );

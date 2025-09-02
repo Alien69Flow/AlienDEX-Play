@@ -34,21 +34,21 @@ const AdvancedTrading = () => {
           <CardHeader>
             <CardTitle className="text-foreground">Advanced Trading</CardTitle>
             <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="perpetuals" className="flex items-center gap-2">
-                <Zap size={16} />
-                Perpetuals
+              <TabsTrigger value="commodities" className="flex items-center gap-2">
+                <Wheat size={16} />
+                Commodities
               </TabsTrigger>
               <TabsTrigger value="futures" className="flex items-center gap-2">
                 <BarChart3 size={16} />
                 Futures
               </TabsTrigger>
+              <TabsTrigger value="perpetuals" className="flex items-center gap-2">
+                <Zap size={16} />
+                Perpetuals
+              </TabsTrigger>
               <TabsTrigger value="tokenized" className="flex items-center gap-2">
                 <Building size={16} />
                 Tokenized Assets
-              </TabsTrigger>
-              <TabsTrigger value="commodities" className="flex items-center gap-2">
-                <Wheat size={16} />
-                Commodities
               </TabsTrigger>
             </TabsList>
           </CardHeader>

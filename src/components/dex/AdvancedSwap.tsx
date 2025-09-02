@@ -116,6 +116,17 @@ const AdvancedSwap = () => {
                   />
                 </div>
               </div>
+
+              {/* Slippage Settings */}
+              <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <span className="text-sm">Slippage Tolerance</span>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" className="text-xs">0.1%</Button>
+                  <Button variant="outline" size="sm" className="text-xs">0.5%</Button>
+                  <Button variant="outline" size="sm" className="text-xs bg-primary text-primary-foreground">1.0%</Button>
+                  <Button variant="outline" size="sm" className="text-xs">2.0%</Button>
+                </div>
+              </div>
             </TabsContent>
 
             <TabsContent value="limit" className="space-y-6">

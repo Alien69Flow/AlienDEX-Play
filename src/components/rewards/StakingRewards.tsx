@@ -91,10 +91,6 @@ const StakingRewards = () => {
           <CardHeader>
             <CardTitle className="text-foreground">Earn Rewards</CardTitle>
             <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="staking" className="flex items-center gap-2">
-                <Lock size={16} />
-                Staking
-              </TabsTrigger>
               <TabsTrigger value="farming" className="flex items-center gap-2">
                 <Tractor size={16} />
                 Farming
@@ -103,59 +99,13 @@ const StakingRewards = () => {
                 <Droplets size={16} />
                 Liquidity
               </TabsTrigger>
+              <TabsTrigger value="staking" className="flex items-center gap-2">
+                <Lock size={16} />
+                Staking
+              </TabsTrigger>
             </TabsList>
           </CardHeader>
           <CardContent>
-            <TabsContent value="staking" className="space-y-6">
-              <div className="grid gap-4">
-                <h3 className="text-lg font-bold text-foreground">Staking Pools</h3>
-                {stakingPools.map((pool, index) => (
-                  <Card key={index} className="border border-primary/20 bg-muted/30">
-                    <CardContent className="p-6">
-                      <div className="flex justify-between items-start mb-4">
-                        <div>
-                          <h4 className="font-bold text-xl mb-2">{pool.token} Staking</h4>
-                          <div className="flex gap-2 mb-2">
-                            {pool.rewards.map((reward, i) => (
-                              <Badge key={i} variant="secondary" className="text-xs">
-                                {reward}
-                              </Badge>
-                            ))}
-                          </div>
-                          <p className="text-sm text-muted-foreground">
-                            Min Stake: {pool.minStake} {pool.token} • Lock: {pool.lockPeriod}
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-3xl font-bold text-primary">{pool.apy}%</p>
-                          <p className="text-sm text-muted-foreground">APY</p>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            TVL: ${pool.tvl}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="space-y-3">
-                        <Input
-                          placeholder={`Enter ${pool.token} amount`}
-                          value={stakeAmount}
-                          onChange={(e) => setStakeAmount(e.target.value)}
-                          className="text-lg font-bold"
-                        />
-                        <div className="grid grid-cols-2 gap-2">
-                          <Button className="bg-primary hover:bg-primary/90">
-                            Stake
-                          </Button>
-                          <Button variant="outline">
-                            Unstake
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </TabsContent>
-
             <TabsContent value="farming" className="space-y-6">
               <div className="grid gap-4">
                 <h3 className="text-lg font-bold text-foreground">Yield Farming</h3>
@@ -239,6 +189,57 @@ const StakingRewards = () => {
                 ))}
               </div>
             </TabsContent>
+
+            <TabsContent value="staking" className="space-y-6">
+              <div className="grid gap-4">
+                <h3 className="text-lg font-bold text-foreground">Staking Pools</h3>
+                {stakingPools.map((pool, index) => (
+                  <Card key={index} className="border border-primary/20 bg-muted/30">
+                    <CardContent className="p-6">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h4 className="font-bold text-xl mb-2">{pool.token} Staking</h4>
+                          <div className="flex gap-2 mb-2">
+                            {pool.rewards.map((reward, i) => (
+                              <Badge key={i} variant="secondary" className="text-xs">
+                                {reward}
+                              </Badge>
+                            ))}
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            Min Stake: {pool.minStake} {pool.token} • Lock: {pool.lockPeriod}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-3xl font-bold text-primary">{pool.apy}%</p>
+                          <p className="text-sm text-muted-foreground">APY</p>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            TVL: ${pool.tvl}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="space-y-3">
+                        <Input
+                          placeholder={`Enter ${pool.token} amount`}
+                          value={stakeAmount}
+                          onChange={(e) => setStakeAmount(e.target.value)}
+                          className="text-lg font-bold"
+                        />
+                        <div className="grid grid-cols-2 gap-2">
+                          <Button className="bg-primary hover:bg-primary/90">
+                            Stake
+                          </Button>
+                          <Button variant="outline">
+                            Unstake
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
           </CardContent>
         </Card>
       </Tabs>

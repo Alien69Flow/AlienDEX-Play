@@ -10,21 +10,31 @@ interface PriceData {
 
 // Mapeo de symbols para CoinGecko API
 const COINGECKO_IDS = {
+  ATOM: 'cosmos',
   BTC: 'bitcoin',
   ETH: 'ethereum', 
   BNB: 'binancecoin',
   ADA: 'cardano',
   SOL: 'solana',
+  TAO: 'bittensor',
+  INJ: 'injective-protocol',
+  POL: 'polymath',
+  XAUT: 'tether-gold',
   ALIEN: 'alien-token' // Placeholder - usar el ID real de ALIEN token
 };
 
 export const usePriceData = () => {
   const [prices, setPrices] = useState<Record<string, PriceData>>({
+    ATOM: { symbol: 'ATOM', price: 8.50, change24h: 3.25, volume24h: 125000000 },
     BTC: { symbol: 'BTC', price: 120500.00, change24h: 2.45, volume24h: 28500000000 },
     ETH: { symbol: 'ETH', price: 4050.00, change24h: -1.23, volume24h: 15200000000 },
     BNB: { symbol: 'BNB', price: 820.00, change24h: 3.67, volume24h: 1200000000 },
     ADA: { symbol: 'ADA', price: 0.95, change24h: 5.42, volume24h: 890000000 },
     SOL: { symbol: 'SOL', price: 210.00, change24h: -2.15, volume24h: 2100000000 },
+    TAO: { symbol: 'TAO', price: 450.00, change24h: 8.75, volume24h: 89000000 },
+    INJ: { symbol: 'INJ', price: 32.50, change24h: -2.15, volume24h: 67000000 },
+    POL: { symbol: 'POL', price: 0.85, change24h: 1.85, volume24h: 45000000 },
+    XAUT: { symbol: 'XAUT', price: 2040.50, change24h: 0.25, volume24h: 25000000 },
     ALIEN: { symbol: 'ALIEN', price: 69.00, change24h: 15.67, volume24h: 450000000 },
   });
 
