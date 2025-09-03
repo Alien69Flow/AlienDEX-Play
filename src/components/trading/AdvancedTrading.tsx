@@ -20,11 +20,26 @@ const AdvancedTrading = () => {
     { contract: "SOL-MAR25", price: 230, premium: 9.5, openInterest: "180M" },
   ];
 
+  const commodities = [
+    { symbol: "XAUUSD", name: "Gold", price: 3580.40, change: 1.25, volume: "12.8B", type: "Precious Metal" },
+    { symbol: "XAGUSD", name: "Silver", price: 47.85, change: 2.15, volume: "2.1B", type: "Precious Metal" },
+    { symbol: "WTIUSD", name: "Crude Oil", price: 78.90, change: -0.85, volume: "8.4B", type: "Energy" },
+    { symbol: "NGASUSD", name: "Natural Gas", price: 3.45, change: 3.20, volume: "1.8B", type: "Energy" },
+    { symbol: "WHTUSD", name: "Wheat", price: 545.20, change: 1.45, volume: "890M", type: "Agriculture" },
+    { symbol: "CORNUSD", name: "Corn", price: 432.80, change: -1.20, volume: "650M", type: "Agriculture" },
+    { symbol: "COFUSD", name: "Coffee", price: 245.60, change: 2.80, volume: "420M", type: "Agriculture" },
+    { symbol: "COCUSD", name: "Cocoa", price: 3850.40, change: 4.15, volume: "380M", type: "Agriculture" }
+  ];
+
   const tokenizedAssets = [
     { symbol: "TSLA", name: "Tesla Inc.", price: 248.50, change: 1.85, type: "Stock" },
     { symbol: "AAPL", name: "Apple Inc.", price: 189.30, change: -0.65, type: "Stock" },
-    { symbol: "GOLD", name: "Gold Futures", price: 2040.80, change: 0.92, type: "Commodity" },
-    { symbol: "CRUDE", name: "Crude Oil", price: 78.45, change: 2.15, type: "Commodity" },
+    { symbol: "GOOGL", name: "Alphabet Inc.", price: 165.80, change: 2.40, type: "Stock" },
+    { symbol: "MSFT", name: "Microsoft Corp.", price: 425.60, change: 1.20, type: "Stock" },
+    { symbol: "NVDA", name: "NVIDIA Corp.", price: 890.40, change: 3.85, type: "Stock" },
+    { symbol: "AMZN", name: "Amazon Inc.", price: 178.90, change: -0.45, type: "Stock" },
+    { symbol: "SPDR", name: "S&P 500 ETF", price: 512.80, change: 0.85, type: "ETF" },
+    { symbol: "QQQ", name: "NASDAQ 100 ETF", price: 405.20, change: 1.45, type: "ETF" }
   ];
 
   return (
@@ -161,30 +176,41 @@ const AdvancedTrading = () => {
             </TabsContent>
 
             <TabsContent value="commodities" className="space-y-4">
-              <div className="text-center p-8 rounded-2xl border border-primary/20 bg-muted/30">
-                <Wheat className="mx-auto mb-4 text-primary" size={64} />
-                <h3 className="text-2xl font-bold mb-4">Commodity Trading</h3>
-                <p className="text-muted-foreground mb-6">
-                  Trade tokenized commodities including precious metals, energy, and agricultural products
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <Button variant="outline" className="h-20 flex flex-col gap-2">
-                    <DollarSign size={24} />
-                    <span>Gold</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex flex-col gap-2">
-                    <DollarSign size={24} />
-                    <span>Silver</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex flex-col gap-2">
-                    <DollarSign size={24} />
-                    <span>Oil</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex flex-col gap-2">
-                    <Wheat size={24} />
-                    <span>Wheat</span>
-                  </Button>
-                </div>
+              <div className="grid gap-4">
+                <h3 className="text-lg font-bold text-foreground">Commodity Trading</h3>
+                {commodities.map((commodity, index) => (
+                  <Card key={index} className="border border-primary/20 bg-muted/30">
+                    <CardContent className="p-4">
+                      <div className="flex justify-between items-center mb-3">
+                        <div>
+                          <h4 className="font-bold text-lg">{commodity.name}</h4>
+                          <p className="text-sm text-muted-foreground">{commodity.symbol}</p>
+                          <Badge variant="secondary" className="text-xs mt-1">
+                            {commodity.type}
+                          </Badge>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xl font-bold">${commodity.price}</p>
+                          <p className={`text-sm font-medium ${commodity.change >= 0 ? "text-primary" : "text-destructive"}`}>
+                            {commodity.change >= 0 ? "+" : ""}{commodity.change}%
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex justify-between text-sm text-muted-foreground mb-3">
+                        <span>24h Volume: {commodity.volume}</span>
+                        <span>Market: Open</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button className="bg-primary hover:bg-primary/90">
+                          Buy
+                        </Button>
+                        <Button variant="outline">
+                          Sell
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </TabsContent>
           </CardContent>

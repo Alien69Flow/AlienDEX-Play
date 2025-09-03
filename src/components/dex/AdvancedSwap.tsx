@@ -43,6 +43,14 @@ const AdvancedSwap = () => {
         <CardContent>
           <Tabs value={activeSwapTab} onValueChange={setActiveSwapTab}>
             <TabsList className="grid w-full grid-cols-4 mb-6">
+              <TabsTrigger value="bridge" className="flex items-center gap-2">
+                <GitBranch size={16} />
+                <span>Bridge</span>
+              </TabsTrigger>
+              <TabsTrigger value="fiat" className="flex items-center gap-2">
+                <DollarSign size={16} />
+                <span>Buy/Sell</span>
+              </TabsTrigger>
               <TabsTrigger value="instant" className="flex items-center gap-2">
                 <ArrowDownUp size={16} />
                 <span>Instant</span>
@@ -50,14 +58,6 @@ const AdvancedSwap = () => {
               <TabsTrigger value="limit" className="flex items-center gap-2">
                 <Clock size={16} />
                 <span>Limit</span>
-              </TabsTrigger>
-              <TabsTrigger value="fiat" className="flex items-center gap-2">
-                <DollarSign size={16} />
-                <span>Buy/Sell</span>
-              </TabsTrigger>
-              <TabsTrigger value="bridge" className="flex items-center gap-2">
-                <GitBranch size={16} />
-                <span>Bridge</span>
               </TabsTrigger>
             </TabsList>
 

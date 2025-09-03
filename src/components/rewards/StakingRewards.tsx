@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Coins, Tractor, Droplets, Lock, TrendingUp } from "lucide-react";
 
-const StakingRewards = () => {
+const StakingRewards = ({ farmingOnly = false, liquidityOnly = false, stakingOnly = false }: { farmingOnly?: boolean, liquidityOnly?: boolean, stakingOnly?: boolean }) => {
   const [stakeAmount, setStakeAmount] = useState("");
 
   const stakingPools = [
@@ -84,29 +84,34 @@ const StakingRewards = () => {
     },
   ];
 
+  const defaultTab = farmingOnly ? "farming" : liquidityOnly ? "liquidity" : "staking";
+  const showTabs = !farmingOnly && !liquidityOnly && !stakingOnly;
+
   return (
     <div className="space-y-6">
-      <Tabs defaultValue="staking" className="w-full">
+      <Tabs defaultValue={defaultTab} className="w-full">
         <Card className="border border-primary/30 bg-card/60 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-foreground">Earn Rewards</CardTitle>
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="farming" className="flex items-center gap-2">
-                <Tractor size={16} />
-                Farming
-              </TabsTrigger>
-              <TabsTrigger value="liquidity" className="flex items-center gap-2">
-                <Droplets size={16} />
-                Liquidity
-              </TabsTrigger>
-              <TabsTrigger value="staking" className="flex items-center gap-2">
-                <Lock size={16} />
-                Staking
-              </TabsTrigger>
-            </TabsList>
+            {showTabs && (
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="farming" className="flex items-center gap-2">
+                  <Tractor size={16} />
+                  Farming
+                </TabsTrigger>
+                <TabsTrigger value="liquidity" className="flex items-center gap-2">
+                  <Droplets size={16} />
+                  Liquidity
+                </TabsTrigger>
+                <TabsTrigger value="staking" className="flex items-center gap-2">
+                  <Lock size={16} />
+                  Staking
+                </TabsTrigger>
+              </TabsList>
+            )}
           </CardHeader>
           <CardContent>
-            <TabsContent value="farming" className="space-y-6">
+            {(showTabs || farmingOnly) && <TabsContent value="farming" className="space-y-6">
               <div className="grid gap-4">
                 <h3 className="text-lg font-bold text-foreground">Yield Farming</h3>
                 {farmingPools.map((farm, index) => (
@@ -146,9 +151,9 @@ const StakingRewards = () => {
                   </Card>
                 ))}
               </div>
-            </TabsContent>
+            </TabsContent>}
 
-            <TabsContent value="liquidity" className="space-y-6">
+            {(showTabs || liquidityOnly) && <TabsContent value="liquidity" className="space-y-6">
               <div className="grid gap-4">
                 <h3 className="text-lg font-bold text-foreground">Liquidity Pools</h3>
                 {liquidityPools.map((pool, index) => (
@@ -188,9 +193,9 @@ const StakingRewards = () => {
                   </Card>
                 ))}
               </div>
-            </TabsContent>
+            </TabsContent>}
 
-            <TabsContent value="staking" className="space-y-6">
+            {(showTabs || stakingOnly) && <TabsContent value="staking" className="space-y-6">
               <div className="grid gap-4">
                 <h3 className="text-lg font-bold text-foreground">Staking Pools</h3>
                 {stakingPools.map((pool, index) => (
@@ -238,7 +243,7 @@ const StakingRewards = () => {
                   </Card>
                 ))}
               </div>
-            </TabsContent>
+            </TabsContent>}
 
           </CardContent>
         </Card>

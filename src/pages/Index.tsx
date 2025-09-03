@@ -7,10 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowDownUp, Gamepad2, Dices, TicketIcon, Crown, TrendingUp, Wallet, Settings, Wifi } from "lucide-react";
 import SwapInterface from "@/components/dex/SwapInterface";
 import GamingHub from "@/components/gaming/GamingHub";
-import ClassicCasinoGames from "@/components/casino/ClassicCasinoGames";
+import CasinoGames from "@/components/casino/CasinoGames";
 import LotterySystem from "@/components/lottery/LotterySystem";
 import AdvancedTrading from "@/components/trading/AdvancedTrading";
-import StakingRewards from "@/components/rewards/StakingRewards";
+import RewardsPanel from "@/components/rewards/RewardsPanel";
 import SettingsModal from "@/components/settings/SettingsModal";
 import { usePriceData } from "@/hooks/usePriceData";
 import { useWallet } from "@/hooks/useWallet";
@@ -21,6 +21,13 @@ const Index = () => {
   const [showSettings, setShowSettings] = useState(false);
   const priceData = usePriceData();
   const { wallet, connectWallet, disconnect, isLoading, getShortAddress, isMetaMaskInstalled } = useWallet();
+  
+  // Ordenar tokens por precio (BTC, ETH, XAUT, BNB, TAO, SOL, ALIEN, etc.)
+  const sortedTokens = Object.values(priceData).sort((a, b) => {
+    const order = ['BTC', 'ETH', 'XAUT', 'BNB', 'TAO', 'SOL', 'ALIEN', 'INJ', 'ADA', 'ATOM', 'POL', 'EUR/USD'];
+    return order.indexOf(a.symbol) - order.indexOf(b.symbol);
+  });
+  const displayTokens = sortedTokens.slice(0, 7);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background font-nasalization">
@@ -64,12 +71,10 @@ const Index = () => {
                 )}
                 
                 <div className="text-center px-4 py-2 md:px-6 md:py-3 bg-gradient-to-br from-muted/60 to-background/60 rounded-2xl border border-border shadow-deep backdrop-blur-sm">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">
-                    {wallet.isConnected ? 'ETH Balance' : 'Total Balance'}
-                  </p>
-                  <p className="font-bold text-xl md:text-2xl text-foreground mt-1">
-                    {wallet.isConnected ? `${wallet.balance} ETH` : '$1000.50'}
-                  </p>
+              <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
+                <span>Total Balance</span>
+                <span>${wallet.isConnected ? (parseFloat(wallet.balance) * (priceData.ETH?.price || 4050)).toFixed(2) : "Connect Wallet"}</span>
+              </div>
                 </div>
                 
                 <Button 
@@ -90,7 +95,7 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-card/80 via-muted/40 to-card/80"></div>
           <CardContent className="p-3 md:p-6 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4">
-              {Object.values(priceData).map((token, index) => (
+              {displayTokens.map((token, index) => (
                 <div 
                   key={token.symbol} 
                   className="flex flex-col gap-2 p-3 md:p-4 bg-gradient-to-br from-muted/40 to-background/40 rounded-xl border border-primary/30 hover:border-primary/60 transition-all duration-300 backdrop-blur-sm"
@@ -176,7 +181,7 @@ const Index = () => {
           </Card>
 
           <TabsContent value="casino" className="space-y-6">
-            <ClassicCasinoGames />
+            <CasinoGames />
           </TabsContent>
 
           <TabsContent value="gaming" className="space-y-6">
@@ -188,7 +193,7 @@ const Index = () => {
           </TabsContent>
 
           <TabsContent value="rewards" className="space-y-6">
-            <StakingRewards />
+            <RewardsPanel />
           </TabsContent>
 
           <TabsContent value="swap" className="space-y-6">

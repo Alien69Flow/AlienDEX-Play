@@ -67,6 +67,37 @@ const GamingHub = () => {
     });
   };
 
+  const esportsPlatforms = [
+    {
+      name: "FACEIT",
+      logo: "🎯",
+      url: "https://faceit.com",
+      games: ["CS2", "Valorant", "League of Legends"],
+      description: "Competitive gaming platform"
+    },
+    {
+      name: "ESL Gaming",
+      logo: "🏆",
+      url: "https://eslgaming.com",
+      games: ["CS2", "Dota 2", "Rainbow Six"],
+      description: "Premier esports tournaments"
+    },
+    {
+      name: "GameBattles",
+      logo: "⚔️",
+      url: "https://gamebattles.majorleaguegaming.com",
+      games: ["Call of Duty", "Fortnite", "Apex"],
+      description: "MLG competitive ladders"
+    },
+    {
+      name: "Challengermode",
+      logo: "🎮",
+      url: "https://challengermode.com",
+      games: ["CS2", "Valorant", "Rocket League"],
+      description: "Automated tournaments"
+    }
+  ];
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="lg:col-span-2 space-y-6">
@@ -119,6 +150,44 @@ const GamingHub = () => {
             </Card>
           ))}
         </div>
+
+        {/* Esports Platforms */}
+        <Card className="bg-black/40 border-white/10">
+          <CardHeader>
+            <CardTitle className="text-white flex items-center space-x-2">
+              <Trophy className="text-yellow-400" size={20} />
+              <span>Esports Platforms</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {esportsPlatforms.map((platform, index) => (
+                <div key={index} className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-blue-500/50 transition-colors">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <span className="text-2xl">{platform.logo}</span>
+                    <div>
+                      <h4 className="text-white font-bold">{platform.name}</h4>
+                      <p className="text-gray-400 text-sm">{platform.description}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-1 mb-3">
+                    {platform.games.slice(0, 3).map((game, i) => (
+                      <Badge key={i} variant="secondary" className="text-xs bg-blue-500/20 text-blue-400">
+                        {game}
+                      </Badge>
+                    ))}
+                  </div>
+                  <Button
+                    className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                    onClick={() => window.open(platform.url, '_blank')}
+                  >
+                    Visit Platform
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Leaderboard */}
         <Card className="bg-black/40 border-white/10">
