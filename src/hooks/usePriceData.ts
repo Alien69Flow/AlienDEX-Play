@@ -18,9 +18,22 @@ const COINGECKO_IDS = {
   SOL: 'solana',
   TAO: 'bittensor',
   INJ: 'injective-protocol',
-  POL: 'polygon-ecosystem-token', // Corregido: POL es el nuevo MATIC
+  POL: 'polygon-ecosystem-token',
   XAUT: 'tether-gold',
-  ALIEN: 'alien-token' // Placeholder - usar el ID real de ALIEN token
+  ALIEN: 'alien-token'
+};
+
+// Mapeo para stocks/commodities reales
+const EXTERNAL_ASSETS = {
+  TSLA: 'TSLA',
+  AAPL: 'AAPL', 
+  GOOGL: 'GOOGL',
+  MSFT: 'MSFT',
+  NVDA: 'NVDA',
+  AMZN: 'AMZN',
+  XAGUSD: 'XAGUSD', // Silver
+  WTIUSD: 'WTIUSD', // Oil
+  NGASUSD: 'NGASUSD' // Gas
 };
 
 export const usePriceData = () => {
@@ -57,6 +70,14 @@ export const usePriceData = () => {
       // Fetch EUR/USD rate
       const forexResponse = await axios.get(
         'https://api.exchangerate-api.com/v4/latest/EUR',
+        {
+          timeout: 10000,
+        }
+      ).catch(() => null);
+
+      // Fetch real stock/commodity prices
+      const stocksResponse = await axios.get(
+        'https://api.marketstack.com/v1/eod/latest?access_key=demo&symbols=AAPL,TSLA,GOOGL,MSFT,NVDA,AMZN',
         {
           timeout: 10000,
         }

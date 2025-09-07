@@ -21,25 +21,39 @@ const AdvancedTrading = () => {
   ];
 
   const commodities = [
-    { symbol: "XAUUSD", name: "Gold", price: 3580.40, change: 1.25, volume: "12.8B", type: "Precious Metal" },
-    { symbol: "XAGUSD", name: "Silver", price: 47.85, change: 2.15, volume: "2.1B", type: "Precious Metal" },
-    { symbol: "WTIUSD", name: "Crude Oil", price: 78.90, change: -0.85, volume: "8.4B", type: "Energy" },
-    { symbol: "NGASUSD", name: "Natural Gas", price: 3.45, change: 3.20, volume: "1.8B", type: "Energy" },
-    { symbol: "WHTUSD", name: "Wheat", price: 545.20, change: 1.45, volume: "890M", type: "Agriculture" },
-    { symbol: "CORNUSD", name: "Corn", price: 432.80, change: -1.20, volume: "650M", type: "Agriculture" },
-    { symbol: "COFUSD", name: "Coffee", price: 245.60, change: 2.80, volume: "420M", type: "Agriculture" },
-    { symbol: "COCUSD", name: "Cocoa", price: 3850.40, change: 4.15, volume: "380M", type: "Agriculture" }
+    { symbol: "XAUUSD", name: "Gold", price: 3582.50, change: 1.85, volume: "15.2B", type: "Precious Metal" },
+    { symbol: "XAGUSD", name: "Silver", price: 48.20, change: 2.45, volume: "2.8B", type: "Precious Metal" },
+    { symbol: "XPDUSD", name: "Palladium", price: 1245.80, change: -1.20, volume: "890M", type: "Precious Metal" },
+    { symbol: "XPTUSD", name: "Platinum", price: 965.40, change: 0.85, volume: "1.2B", type: "Precious Metal" },
+    { symbol: "WTIUSD", name: "Crude Oil WTI", price: 79.45, change: -0.65, volume: "8.9B", type: "Energy" },
+    { symbol: "BRUSD", name: "Brent Oil", price: 82.80, change: -0.45, volume: "7.8B", type: "Energy" },
+    { symbol: "NGASUSD", name: "Natural Gas", price: 3.52, change: 3.45, volume: "2.1B", type: "Energy" },
+    { symbol: "WHTUSD", name: "Wheat", price: 548.90, change: 1.75, volume: "950M", type: "Agriculture" },
+    { symbol: "CORNUSD", name: "Corn", price: 435.20, change: -0.95, volume: "720M", type: "Agriculture" },
+    { symbol: "COFUSD", name: "Coffee", price: 248.10, change: 3.15, volume: "480M", type: "Agriculture" },
+    { symbol: "COCUSD", name: "Cocoa", price: 3875.60, change: 4.85, volume: "420M", type: "Agriculture" },
+    { symbol: "SOYUSD", name: "Soybeans", price: 1385.40, change: 1.25, volume: "680M", type: "Agriculture" },
+    { symbol: "SUGUSD", name: "Sugar", price: 21.45, change: 2.10, volume: "350M", type: "Agriculture" },
+    { symbol: "COTUSD", name: "Cotton", price: 78.25, change: -0.80, volume: "280M", type: "Agriculture" }
   ];
 
   const tokenizedAssets = [
-    { symbol: "TSLA", name: "Tesla Inc.", price: 248.50, change: 1.85, type: "Stock" },
     { symbol: "AAPL", name: "Apple Inc.", price: 189.30, change: -0.65, type: "Stock" },
+    { symbol: "AMZN", name: "Amazon Inc.", price: 178.90, change: -0.45, type: "Stock" },
     { symbol: "GOOGL", name: "Alphabet Inc.", price: 165.80, change: 2.40, type: "Stock" },
+    { symbol: "META", name: "Meta Platforms", price: 485.20, change: 1.95, type: "Stock" },
     { symbol: "MSFT", name: "Microsoft Corp.", price: 425.60, change: 1.20, type: "Stock" },
     { symbol: "NVDA", name: "NVIDIA Corp.", price: 890.40, change: 3.85, type: "Stock" },
-    { symbol: "AMZN", name: "Amazon Inc.", price: 178.90, change: -0.45, type: "Stock" },
-    { symbol: "SPDR", name: "S&P 500 ETF", price: 512.80, change: 0.85, type: "ETF" },
-    { symbol: "QQQ", name: "NASDAQ 100 ETF", price: 405.20, change: 1.45, type: "ETF" }
+    { symbol: "TSLA", name: "Tesla Inc.", price: 248.50, change: 1.85, type: "Stock" },
+    { symbol: "NFLX", name: "Netflix Inc.", price: 612.80, change: 0.75, type: "Stock" },
+    { symbol: "AMD", name: "AMD Inc.", price: 148.90, change: 2.15, type: "Stock" },
+    { symbol: "CRM", name: "Salesforce Inc.", price: 285.40, change: -1.05, type: "Stock" },
+    { symbol: "ORCL", name: "Oracle Corp.", price: 142.60, change: 0.95, type: "Stock" },
+    { symbol: "QQQ", name: "NASDAQ 100 ETF", price: 405.20, change: 1.45, type: "ETF" },
+    { symbol: "SPY", name: "S&P 500 ETF", price: 512.80, change: 0.85, type: "ETF" },
+    { symbol: "VTI", name: "Vanguard Total Stock", price: 268.90, change: 0.75, type: "ETF" },
+    { symbol: "IWM", name: "Russell 2000 ETF", price: 225.40, change: 1.25, type: "ETF" },
+    { symbol: "EFA", name: "MSCI EAFE ETF", price: 78.60, change: 0.55, type: "ETF" }
   ];
 
   return (

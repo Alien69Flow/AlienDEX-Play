@@ -14,31 +14,67 @@ const SportsBook = () => {
     {
       id: 1,
       sport: "Football",
-      league: "Premier League",
+      category: "Football",
+      league: "Premier League 25/26",
       homeTeam: "Manchester City",
-      awayTeam: "Arsenal",
-      date: "Dec 15, 2024 15:00",
+      awayTeam: "Arsenal", 
+      date: "Sep 15, 2025 15:00",
       odds: { home: 1.85, draw: 3.20, away: 4.50 },
       live: false
     },
     {
       id: 2,
+      sport: "Football", 
+      category: "Football",
+      league: "Champions League 25/26",
+      homeTeam: "Real Madrid",
+      awayTeam: "Barcelona",
+      date: "Sep 20, 2025 21:00",
+      odds: { home: 2.15, draw: 3.10, away: 3.80 },
+      live: false
+    },
+    {
+      id: 3,
       sport: "Basketball",
-      league: "NBA",
+      category: "Basketball", 
+      league: "NBA 2025-26",
       homeTeam: "Lakers",
       awayTeam: "Warriors",
-      date: "Dec 15, 2024 21:00",
+      date: "Sep 25, 2025 21:00",
       odds: { home: 2.10, draw: null, away: 1.72 },
       live: true
     },
     {
-      id: 3,
+      id: 4,
       sport: "Tennis",
-      league: "ATP Finals",
+      category: "Tennis",
+      league: "US Open 2025",
       homeTeam: "Djokovic",
-      awayTeam: "Alcaraz",
-      date: "Dec 16, 2024 14:00",
+      awayTeam: "Alcaraz", 
+      date: "Sep 12, 2025 14:00",
       odds: { home: 1.95, draw: null, away: 1.80 },
+      live: false
+    },
+    {
+      id: 5,
+      sport: "Formula 1",
+      category: "Motorsport",
+      league: "F1 2025 Season",
+      homeTeam: "Verstappen",
+      awayTeam: "Hamilton",
+      date: "Sep 14, 2025 14:00", 
+      odds: { home: 1.45, draw: null, away: 2.85 },
+      live: false
+    },
+    {
+      id: 6,
+      sport: "Horse Racing",
+      category: "Horse Racing",
+      league: "Kentucky Derby 2026",
+      homeTeam: "Thunder Bolt",
+      awayTeam: "Lightning Strike",
+      date: "May 2, 2026 16:00",
+      odds: { home: 3.20, draw: null, away: 2.10 },
       live: false
     }
   ];
@@ -47,21 +83,45 @@ const SportsBook = () => {
     {
       id: 1,
       game: "CS2",
-      tournament: "IEM Katowice",
+      category: "FPS",
+      tournament: "IEM Katowice 2025",
       team1: "Navi",
       team2: "FaZe",
-      date: "Dec 15, 2024 18:00",
+      date: "Sep 15, 2025 18:00",
       odds: { team1: 1.65, team2: 2.25 },
       live: true
     },
     {
       id: 2,
       game: "Dota 2",
-      tournament: "The International",
+      category: "MOBA", 
+      tournament: "The International 2025",
       team1: "Team Spirit",
       team2: "PSG.LGD",
-      date: "Dec 16, 2024 12:00",
+      date: "Oct 16, 2025 12:00",
       odds: { team1: 2.40, team2: 1.55 },
+      live: false
+    },
+    {
+      id: 3,
+      game: "League of Legends",
+      category: "MOBA",
+      tournament: "Worlds 2025",
+      team1: "T1",
+      team2: "G2 Esports",
+      date: "Nov 5, 2025 15:00",
+      odds: { team1: 1.85, team2: 1.95 },
+      live: false
+    },
+    {
+      id: 4,
+      game: "Valorant",
+      category: "FPS", 
+      tournament: "VCT Champions 2025",
+      team1: "Sentinels",
+      team2: "Fnatic",
+      date: "Sep 28, 2025 19:00",
+      odds: { team1: 2.10, team2: 1.72 },
       live: false
     }
   ];
@@ -69,27 +129,51 @@ const SportsBook = () => {
   const predictionMarkets = [
     {
       id: 1,
-      question: "Will Bitcoin reach $150,000 by end of 2024?",
+      question: "Will Bitcoin reach $200,000 by end of 2025?",
       category: "Crypto",
-      odds: { yes: 2.8, no: 1.4 },
-      volume: "$2.3M",
-      deadline: "Dec 31, 2024"
+      odds: { yes: 2.2, no: 1.6 },
+      volume: "$4.8M",
+      deadline: "Dec 31, 2025"
     },
     {
       id: 2,
-      question: "Will Ethereum ETF be approved in Q1 2025?",
-      category: "Crypto",
-      odds: { yes: 1.6, no: 2.3 },
-      volume: "$1.8M",
-      deadline: "Mar 31, 2025"
+      question: "Will Ethereum reach $8,000 in 2025?",
+      category: "Crypto", 
+      odds: { yes: 3.5, no: 1.25 },
+      volume: "$2.1M",
+      deadline: "Dec 31, 2025"
     },
     {
       id: 3,
-      question: "Next Tesla stock price above $300?",
+      question: "Will NVIDIA stock price reach $1,200 by Q2 2026?",
       category: "Stocks",
-      odds: { yes: 3.2, no: 1.3 },
-      volume: "$950K",
-      deadline: "Jan 15, 2025"
+      odds: { yes: 2.8, no: 1.4 },
+      volume: "$1.9M",
+      deadline: "Jun 30, 2026"
+    },
+    {
+      id: 4,
+      question: "Will Tesla Model 2 be released in 2025?",
+      category: "Technology",
+      odds: { yes: 1.8, no: 2.0 },
+      volume: "$1.2M", 
+      deadline: "Dec 31, 2025"
+    },
+    {
+      id: 5,
+      question: "Will OpenAI IPO in 2025?",
+      category: "Technology",
+      odds: { yes: 2.5, no: 1.5 },
+      volume: "$3.2M",
+      deadline: "Dec 31, 2025"
+    },
+    {
+      id: 6,
+      question: "Will Gold reach $4,000/oz in 2025?",
+      category: "Commodities",
+      odds: { yes: 4.2, no: 1.2 },
+      volume: "$890K",
+      deadline: "Dec 31, 2025"
     }
   ];
 
@@ -103,7 +187,7 @@ const SportsBook = () => {
         <Card className="border border-primary/30 bg-card/60 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-foreground">Sports & Prediction Markets</CardTitle>
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="sports" className="flex items-center gap-2">
                 <Timer size={16} />
                 Sports
@@ -115,10 +199,6 @@ const SportsBook = () => {
               <TabsTrigger value="predictions" className="flex items-center gap-2">
                 <Target size={16} />
                 Predictions
-              </TabsTrigger>
-              <TabsTrigger value="live" className="flex items-center gap-2">
-                <TrendingUp size={16} />
-                Live Betting
               </TabsTrigger>
             </TabsList>
           </CardHeader>
@@ -132,7 +212,7 @@ const SportsBook = () => {
                       <div className="flex justify-between items-start mb-4">
                         <div>
                           <div className="flex items-center gap-2 mb-2">
-                            <Badge variant="secondary">{event.sport}</Badge>
+                            <Badge variant="secondary">{event.category}</Badge>
                             <Badge variant="outline">{event.league}</Badge>
                             {event.live && <Badge className="bg-red-500 animate-pulse">LIVE</Badge>}
                           </div>
@@ -188,7 +268,7 @@ const SportsBook = () => {
                       <div className="flex justify-between items-start mb-4">
                         <div>
                           <div className="flex items-center gap-2 mb-2">
-                            <Badge variant="secondary">{event.game}</Badge>
+                            <Badge variant="secondary">{event.category}</Badge>
                             <Badge variant="outline">{event.tournament}</Badge>
                             {event.live && <Badge className="bg-red-500 animate-pulse">LIVE</Badge>}
                           </div>
@@ -262,18 +342,6 @@ const SportsBook = () => {
               </div>
             </TabsContent>
 
-            <TabsContent value="live" className="space-y-4">
-              <div className="text-center p-8 rounded-2xl border border-primary/20 bg-muted/30">
-                <TrendingUp className="mx-auto mb-4 text-primary animate-pulse" size={64} />
-                <h3 className="text-2xl font-bold mb-4">Live Betting</h3>
-                <p className="text-muted-foreground mb-6">
-                  Bet on live sports events with real-time odds updates
-                </p>
-                <Button className="bg-red-500 hover:bg-red-600 text-white animate-pulse">
-                  View Live Events
-                </Button>
-              </div>
-            </TabsContent>
           </CardContent>
         </Card>
 
